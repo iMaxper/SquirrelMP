@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Squirrel from './Components/Squirrel';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +18,10 @@ componentDidMount = () => {
       .then(data => {
         // code to execute once data is defined
         console.log (data)
-        this.setState(state)
+        this.setState(state => {
+            this.state.squirrels = data
+            return state
+        })
       })
       .catch(e => {
         alert(e);
@@ -29,8 +33,8 @@ render() {
     return (
       <div className="App">
         <h1>2018 NYC Squirrel Survey Data</h1>
-        <h3>there are currently {this.state.squirrels.length} squirrels
-        {this.state.squirrels.map(squirrel => <Squirrel/>)} </h3>
+        <h3>there are currently {this.state.squirrels.length} squirrels </h3>
+        {this.state.squirrels.map(squirrel => <Squirrel data={squirrel}/>)}
       </div>
     );
   }
